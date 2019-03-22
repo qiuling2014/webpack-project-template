@@ -1,0 +1,41 @@
+{
+  "extends": "airbnb-base",
+  "rules": {
+    "indent": [
+      "error",
+      2
+    ],
+    "linebreak-style": [
+      "error",
+      "windows"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "class-methods-use-this": "off",
+    "no-new": 0,
+    "no-underscore-dangle": [
+      "error",
+      {
+        "allowAfterThis": true
+      }
+    ],
+    "comma-dangle": [
+      "error",
+      "only-multiline"
+    ]
+  },
+  "globals": {
+    "document": true,
+    "localStorage": true,
+    "window": true,
+    "$": true,
+    "jQuery": true,
+    "f2eGame": true
+  }
+}
