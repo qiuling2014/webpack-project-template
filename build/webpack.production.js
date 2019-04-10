@@ -1,14 +1,18 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const baseConfig = require('./webpack.base');
+const config = require('../config');
 
-const config = merge.smart(baseConfig, {})
-config.plugins.concat([
+const webpackConfig = merge(baseConfig, {
+  mode: 'production',
+  devtool: config.build.productionSourceMap ? '#source-map' : false,
+})
+
+webpackConfig.plugins.concat([
   new webpack.DefinePlugin({
-    __DEV__: JSON.stringify(false),
-  }),
-  new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: ['**/*'] })
+    'process.env': require('../config/prod.env'),
+    'publicPath': config.build.assetsPublicPath
+  })
 ]);
 
-module.exports = config
+module.exports = webpackConfig;

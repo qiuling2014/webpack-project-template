@@ -1,5 +1,5 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin'); // 额外打包插件
-const isDev = process.env.NODE_ENV === 'development';
+const utils = require('./utils');
 
 const px2remLoader = {
   loader: 'px2rem-loader',
@@ -46,20 +46,34 @@ const loaders = [{
   use: [{
     loader: 'url-loader',
     options: {
-      limit: 1,
-      name: '[path][name].[ext]',
-      publicPath: isDev ? '../' : '../',
-      context: './src'
+      limit: 10000,
+      name: 'image/[name].[hash:7].[ext]',
     }
   }]
 }, {
+  test: /\.json$/,
+  exclude: /node_modules/,
+  type: 'javascript/auto',
+  use:[{
+    loader: 'json-loader',
+    options: {
+      name: utils.assetsPath('static/[name].[hash:7].[ext]'),
+    }
+  }]
+}, {
+  test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+  loader: 'url-loader',
+  options: {
+    limit: 10000,
+    name: utils.assetsPath('media/[name].[hash:7].[ext]')
+  }
+}, {
   test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
   use: [{
-    loader: 'file-loader',
+    loader: 'url-loader',
     options: {
-      name: '[name].[ext]',
-      publicPath: isDev ? '../' : '',
-      outputPath: isDev ? '' : '/font'
+      limit: 10000,
+      name: utils.assetsPath('fonts/[name].[hash:7].[ext]'),
     }
   }]
 }];

@@ -1,20 +1,18 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const baseConfig = require('./webpack.base');
+const config = require('../config');
 
-const config = merge.smart(baseConfig, {
-  devServer: {
-    open: false,
-    contentBase: 'dist',
-    port: 8080,
-    host: '127.0.0.1'
-  }
+const webpackConfig = merge.smart(baseConfig, {
+  mode: 'development',
+  devtool: '#cheap-module-eval-source-map',
 })
 
-config.plugins.push(
+webpackConfig.plugins.push(
   new webpack.DefinePlugin({
-    __DEV__: JSON.stringify(true),
+    'process.env': require('../config/dev.env'),
+    'publicPath': JSON.stringify(config.dev.assetsPublicPath)
   })
 );
 
-module.exports = config;
+module.exports = webpackConfig;
