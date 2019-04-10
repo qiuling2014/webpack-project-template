@@ -39,7 +39,8 @@ const webpackConfig = {
     extensions: ['.js', '.css', '.scss', '.sass']
   },
   optimization: {
-    minimizer: [ UglifyJS ]
+    minimizer: [ UglifyJS ],
+    concatenateModules: true
   }
 };
 

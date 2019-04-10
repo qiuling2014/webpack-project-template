@@ -33,7 +33,7 @@ const loaders = [{
 }, {
   test: /\.js$/,
   use: [{
-    loader: 'babel-loader'
+    loader: 'happypack/loader?id=happybabel'
   }, {
     loader: 'eslint-loader',
     options: {
