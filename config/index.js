@@ -10,7 +10,7 @@ module.exports = {
     assetsPublicPath: '/',
     productionSourceMap: true,
     devtool: '#source-map',
-    bundleAnalyzerReport: true // 性能分析
+    bundleAnalyzerReport: process.env.npm_config_report // 性能分析
   },
   dev: {
     env: require('./dev.env'),
